@@ -1,0 +1,15 @@
+package com.cunningbird.thesis.client.customer.main.view
+
+import android.app.Application
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+
+class MainViewModelFactory(
+    private val application: Application,
+    private val accessToken: String
+) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return MainViewModel(application, accessToken) as T
+    }
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/servicesListFragment">
+
+    <fragment
+        android:id="@+id/servicesListFragment"
+        android:name="com.cunningbird.thesis.client.customer.main.view.services.list.ServicesListFragment"
+        android:label="ServicesFragment"
+        tools:layout="@layout/fragment_services_list">
+        <action
+            android:id="@+id/action_servicesListFragment_to_servicesDetailsFragment"
+            app:destination="@id/servicesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/servicesDetailsFragment"
+        android:name="com.cunningbird.thesis.client.customer.main.view.services.details.ServicesDetailsFragment"
+        android:label="ServiceDetailsFragment"
+        tools:layout="@layout/fragment_services_details">
+        <action
+            android:id="@+id/action_servicesDetailsFragment_to_servicesAppointFragment"
+            app:destination="@id/servicesAppointFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/servicesAppointFragment"
+        android:name="com.cunningbird.thesis.client.customer.main.view.services.appoint.ServicesAppointFragment"
+        android:label="AppointServiceFragment"
+        tools:layout="@layout/fragment_services_appoint" />
+
+
+
+    <fragment
+        android:id="@+id/appointmentsListFragment"
+        android:name="com.cunningbird.thesis.client.customer.main.view.appointments.list.AppointmentsListFragment"
+        android:label="AppointmentsFragment"
+        tools:layout="@layout/fragment_appointments_list">
+        <action
+            android:id="@+id/action_appointmentsListFragment_to_appointmentsDetailsFragment"
+            app:destination="@id/appointmentsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appointmentsDetailsFragment"
+        android:name="com.cunningbird.thesis.client.customer.main.view.appointments.details.AppointmentsDetailsFragment"
+        android:label="AppointmentDetailsFragment"
+        tools:layout="@layout/fragment_appointments_details"/>
+
+
+
+    <fragment
+            android:id="@+id/chatsListFragment"
+            android:name="com.cunningbird.thesis.client.customer.main.view.chats.list.ChatsListFragment"
+            android:label="MessagesFragment"
+            tools:layout="@layout/fragment_chats_list">
+        <action
+                android:id="@+id/action_chatsListFragment_to_ChatsDialogFragment"
+                app:destination="@id/ChatsDialogFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/ChatsDialogFragment"
+            android:name="com.cunningbird.thesis.client.customer.main.view.chats.dialog.ChatsDialogFragment"
+            android:label="ChatFragment"
+            tools:layout="@layout/fragment_chats_dialog"/>
+
+
+
+    <fragment
+            android:id="@+id/accountFragment"
+            android:name="com.cunningbird.thesis.client.customer.main.view.account.AccountFragment"
+            android:label="AccountFragment"
+            tools:layout="@layout/fragment_account" />
+
+</navigation>
