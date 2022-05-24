@@ -53,7 +53,7 @@ class ServiceRepositoryImpl(accessToken: String, userId: String) : ServiceReposi
         return client.getServices()
     }
 
-    override fun getServiceById(id: String): Call<Service> {
+    override fun getServiceById(id: UUID): Call<Service> {
         return client.getServiceById(id)
     }
 }

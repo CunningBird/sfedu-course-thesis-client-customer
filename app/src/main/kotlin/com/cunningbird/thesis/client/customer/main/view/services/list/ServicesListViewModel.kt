@@ -13,8 +13,4 @@ class ServicesListViewModel(application: Application, private val repository: Se
     fun getServices(): Call<ServiceList> {
         return repository.getServices()
     }
-
-    fun getServiceById(id: String): Call<Service> {
-        return repository.getServiceById(id)
-    }
 }

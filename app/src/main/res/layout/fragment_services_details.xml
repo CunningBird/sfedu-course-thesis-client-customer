@@ -19,7 +19,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="40dp"
         style="@style/serviceName"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit." />
+        android:text="[Service title]" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_service_amount"
@@ -29,17 +29,17 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="40dp"
         style="@style/serviceAmount"
-        android:text="2,576₽" />
+        android:text="[price]" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_address"
+        android:id="@+id/tv_service_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="40dp"
         style="@style/serviceAddress"
-        tools:text="5 apt, Puskina str., Rostov-on-Don, Russia" />
+        tools:text="[address]" />
 
     <View
         android:id="@+id/upper_separator"

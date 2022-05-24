@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cunningbird.thesis.client.customer.R
 import com.cunningbird.thesis.client.customer.databinding.FragmentServicesListBinding
-import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.ServiceList
 import com.cunningbird.thesis.client.customer.main.domain.repository.ServiceRepository
 import com.cunningbird.thesis.client.customer.main.view.FragmentViewModelFactory
@@ -34,6 +33,8 @@ class ServicesListFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
 
+    private lateinit var adapter: ServicesListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         mainActivity = (activity as MainActivity)
         super.onCreate(savedInstanceState)
@@ -51,7 +52,7 @@ class ServicesListFragment : Fragment() {
             mainActivity.changeToolbar(getString(R.string.your_services), false)
         }
 
-        val adapter = ServicesListAdapter(this::onServiceClick)
+        adapter = ServicesListAdapter(this::onServiceClick)
         binding.rvServices.adapter = adapter
 
         viewModel.getServices().enqueue(object : Callback<ServiceList> {
@@ -73,11 +74,8 @@ class ServicesListFragment : Fragment() {
     }
 
     private fun onServiceClick(i: Int) {
-        val arg = bundleOf(SERVICE_POSITION to i)
+        val id = adapter.list[i].id.toString()
+        val arg = bundleOf("serviceId" to id)
         findNavController().navigate(R.id.action_servicesListFragment_to_servicesDetailsFragment, arg)
-    }
-
-    companion object {
-        const val SERVICE_POSITION = "SERVICE_POSITION"
     }
 }

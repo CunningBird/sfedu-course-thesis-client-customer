@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cunningbird.thesis.client.customer.databinding.ItemServiceBinding
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
 
-class ServicesListAdapter(private val onClickEvent: (p: Int) -> Unit) : RecyclerView.Adapter<ServicesListAdapter.ServiceViewHolder>() {
+class ServicesListAdapter(private val onClickEvent: (p: Int) -> Unit) :
+    RecyclerView.Adapter<ServicesListAdapter.ServiceViewHolder>() {
 
     var list: List<Service> = arrayListOf()
         @SuppressLint("NotifyDataSetChanged")
@@ -15,7 +16,6 @@ class ServicesListAdapter(private val onClickEvent: (p: Int) -> Unit) : Recycler
             field = value
             notifyDataSetChanged()
         }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceViewHolder {
         val binding = ItemServiceBinding
