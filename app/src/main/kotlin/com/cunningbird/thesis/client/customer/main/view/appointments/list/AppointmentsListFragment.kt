@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 
 class AppointmentsListFragment : Fragment() {
-    //todo xml
 //    private lateinit var binding: ServiceInfoBinding
     val viewModel: AppointmentsListViewModel by viewModels()
 

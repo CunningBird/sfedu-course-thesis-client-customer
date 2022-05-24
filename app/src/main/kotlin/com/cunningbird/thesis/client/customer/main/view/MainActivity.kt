@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     val viewModel: MainViewModel by viewModels {
-        // TODO return to AuthActivity if accessToken is null instead NPE
-        MainViewModelFactory(application, intent.getStringExtra("accessToken")!!)
+        MainViewModelFactory(application, intent.getStringExtra("accessToken")!!, intent.getStringExtra("userId")!!)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

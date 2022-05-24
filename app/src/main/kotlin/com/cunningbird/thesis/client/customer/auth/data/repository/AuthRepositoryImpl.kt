@@ -16,7 +16,7 @@ class AuthRepositoryImpl(
 
     private val client: AuthClient
 
-    private val baseUrl = "http://192.168.1.77:8080/oauth2/"
+    private val baseUrl = "http://185.46.11.94:8080/oauth2/"
     private val clientID = "customer-application"
     private val clientSecret = "secret2"
     private val redirectURI = "http://samplecallback1.com/"

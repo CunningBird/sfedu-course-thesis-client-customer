@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainViewModelFactory(
     private val application: Application,
-    private val accessToken: String
+    private val accessToken: String,
+    private val userId: String
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(application, accessToken) as T
+        return MainViewModel(application, accessToken, userId) as T
     }
 }

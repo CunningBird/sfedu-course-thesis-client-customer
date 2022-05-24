@@ -35,7 +35,7 @@ class AuthActivity : AppCompatActivity() {
         binding.wvAuth.settings.javaScriptEnabled = true
         binding.wvAuth.settings.javaScriptCanOpenWindowsAutomatically = true
 
-        // TODO optimize this
+        // TODO disable cookies
         binding.wvAuth.webViewClient = object : WebViewClient() {
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
                 super.onReceivedError(view, request, error)
@@ -66,6 +66,7 @@ class AuthActivity : AppCompatActivity() {
 
                                 val intent = Intent(binding.wvAuth.context, MainActivity::class.java)
                                 intent.putExtra("accessToken", accessToken.accessToken)
+                                intent.putExtra("userId", "bbe0fe62-38d1-11ec-8d3d-0242ac999997") // TODO get ID from auth server
                                 startActivity(intent)
                                 finish()
                             }
