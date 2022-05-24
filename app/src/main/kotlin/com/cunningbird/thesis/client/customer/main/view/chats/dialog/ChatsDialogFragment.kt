@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cunningbird.thesis.client.customer.databinding.FragmentChatsDialogBinding
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Message
-import com.cunningbird.thesis.client.customer.main.domain.entities.chat.MessageAuthor
 import com.cunningbird.thesis.client.customer.main.view.MainActivity
 import com.cunningbird.thesis.client.customer.main.view.chats.list.ChatsListViewModel
 import java.util.*
@@ -48,31 +47,31 @@ class ChatsDialogFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = ChatsDialogAdapter()
-        binding.rvMessages.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvMessages.adapter = adapter
-        messages = arrayListOf<Message>(
-            Message("sa", "adsaddsszxczx", "YESTERDAY", MessageAuthor.Date),
-            Message("sa", "adzxczx", "12:29", MessageAuthor.CUSTOMER),
-            Message("sa", "adsaddsszxczx", "12:31", MessageAuthor.CUSTOMER),
-            Message("sa", "adzxczx", "12:29", MessageAuthor.EXECUTOR),
-            Message("sa", "ax", "12:39", MessageAuthor.EXECUTOR),
-            Message(
-                "sa",
-                "qqqqdssxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxadsaddsszxczx",
-                "12:59",
-                MessageAuthor.CUSTOMER
-            ),
-            Message("sa", "adzxbvczx", "13:29", MessageAuthor.EXECUTOR),
-            Message("sa", "axlih123321", "14:39", MessageAuthor.EXECUTOR),
-            Message("sa", "adzx22222222222222222222222244444333331czx", "15:50", MessageAuthor.CUSTOMER),
-            Message("sa", "axlih123321", "TODAY", MessageAuthor.Date),
-            Message("sa", "azx6587czx", "19:50", MessageAuthor.CUSTOMER),
-            Message("sa", "ffadzx2224333331czx", "20:05", MessageAuthor.CUSTOMER)
-        )
-        adapter.list = messages
-        adapter.notifyDataSetChanged()
+//        adapter = ChatsDialogAdapter()
+//        binding.rvMessages.layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//        binding.rvMessages.adapter = adapter
+//        messages = arrayListOf<Message>(
+//            Message("sa", "adsaddsszxczx", "YESTERDAY", MessageAuthor.Date),
+//            Message("sa", "adzxczx", "12:29", MessageAuthor.CUSTOMER),
+//            Message("sa", "adsaddsszxczx", "12:31", MessageAuthor.CUSTOMER),
+//            Message("sa", "adzxczx", "12:29", MessageAuthor.EXECUTOR),
+//            Message("sa", "ax", "12:39", MessageAuthor.EXECUTOR),
+//            Message(
+//                "sa",
+//                "qqqqdssxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxadsaddsszxczx",
+//                "12:59",
+//                MessageAuthor.CUSTOMER
+//            ),
+//            Message("sa", "adzxbvczx", "13:29", MessageAuthor.EXECUTOR),
+//            Message("sa", "axlih123321", "14:39", MessageAuthor.EXECUTOR),
+//            Message("sa", "adzx22222222222222222222222244444333331czx", "15:50", MessageAuthor.CUSTOMER),
+//            Message("sa", "axlih123321", "TODAY", MessageAuthor.Date),
+//            Message("sa", "azx6587czx", "19:50", MessageAuthor.CUSTOMER),
+//            Message("sa", "ffadzx2224333331czx", "20:05", MessageAuthor.CUSTOMER)
+//        )
+//        adapter.list = messages
+//        adapter.notifyDataSetChanged()
     }
 
     private fun setListeners() {
@@ -91,7 +90,7 @@ class ChatsDialogFragment : Fragment() {
                         "sa",
                         text,
                         "$minutes:$hour24hrs",
-                        MessageAuthor.EXECUTOR
+                        //MessageAuthor.EXECUTOR
                     )
                 )
             }

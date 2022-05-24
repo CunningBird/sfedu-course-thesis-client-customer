@@ -7,7 +7,6 @@ import com.cunningbird.thesis.client.customer.databinding.ItemFromMessageBinding
 import com.cunningbird.thesis.client.customer.databinding.ItemMessageDateHeaderBinding
 import com.cunningbird.thesis.client.customer.databinding.ItemToMessageBinding
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Message
-import com.cunningbird.thesis.client.customer.main.domain.entities.chat.MessageAuthor
 
 class ChatsDialogAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<Message> = arrayListOf()
@@ -55,13 +54,13 @@ class ChatsDialogAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = list.size
 
-    override fun getItemViewType(position: Int): Int =
-        // В приложении для клиентов обратная логика
-        when (list[position].author) {
-            MessageAuthor.EXECUTOR -> TO
-            MessageAuthor.CUSTOMER -> FROM
-            else -> DATE
-        }
+//    override fun getItemViewType(position: Int): Int =
+//        // В приложении для клиентов обратная логика
+//        when (list[position]) {
+//            MessageAuthor.EXECUTOR -> TO
+//            MessageAuthor.CUSTOMER -> FROM
+//            else -> DATE
+//        }
 
 
     inner class MessageFromViewHolder(val binding: ItemFromMessageBinding) :
@@ -71,10 +70,12 @@ class ChatsDialogAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.tvTime.text = message.created
         }
     }
-//todo сделать private
+
+
+    //todo сделать private
     inner class MessageToViewHolder(val binding: ItemToMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-    fun bind(message: Message) {
+        fun bind(message: Message) {
             binding.tvText.text = message.text
             binding.tvTime.text = message.created
         }
@@ -87,6 +88,4 @@ class ChatsDialogAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.tvDate.text = message.created
         }
     }
-
-
 }

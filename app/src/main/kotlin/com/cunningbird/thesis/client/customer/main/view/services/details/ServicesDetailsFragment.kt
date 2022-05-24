@@ -5,13 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cunningbird.thesis.client.customer.R
 import com.cunningbird.thesis.client.customer.databinding.FragmentServicesDetailsBinding
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
-import com.cunningbird.thesis.client.customer.main.domain.repository.ServiceRepository
+import com.cunningbird.thesis.client.customer.main.domain.repository.BackendRepository
 import com.cunningbird.thesis.client.customer.main.view.FragmentViewModelFactory
 import com.cunningbird.thesis.client.customer.main.view.MainActivity
 import retrofit2.Call
@@ -26,8 +25,8 @@ class ServicesDetailsFragment : Fragment() {
     val viewModel: ServicesDetailsViewModel by viewModels {
         FragmentViewModelFactory(
             mainActivity.application,
-            mainActivity.viewModel.serviceRepository,
-            ServiceRepository::class.java
+            mainActivity.viewModel.backendRepository,
+            BackendRepository::class.java
         )
     }
 

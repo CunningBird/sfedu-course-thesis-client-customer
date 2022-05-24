@@ -4,4 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 
 class AccountViewModel(application: Application) : AndroidViewModel(application) {
+
+    // TODO userInfo
+
+    // TODO logout (/logout in auth server)
 }
