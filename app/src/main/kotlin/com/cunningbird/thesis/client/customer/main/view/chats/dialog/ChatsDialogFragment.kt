@@ -1,6 +1,7 @@
 package com.cunningbird.thesis.client.customer.main.view.chats.dialog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,22 +9,31 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cunningbird.thesis.client.customer.databinding.FragmentChatsDialogBinding
+import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Chat
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Message
+import com.cunningbird.thesis.client.customer.main.domain.repository.BackendRepository
+import com.cunningbird.thesis.client.customer.main.view.FragmentViewModelFactory
 import com.cunningbird.thesis.client.customer.main.view.MainActivity
-import com.cunningbird.thesis.client.customer.main.view.chats.list.ChatsListViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class ChatsDialogFragment : Fragment() {
 
     private lateinit var binding: FragmentChatsDialogBinding
 
-    val viewModel: ChatsListViewModel by viewModels()
-
-    private lateinit var adapter: ChatsDialogAdapter
-
-    private var messages: MutableList<Message> = arrayListOf()
+    private val viewModel: ChatsDialogViewModel by viewModels {
+        FragmentViewModelFactory(
+            mainActivity.application,
+            mainActivity.viewModel.backendRepository,
+            BackendRepository::class.java
+        )
+    }
 
     private lateinit var mainActivity: MainActivity
+
+    private lateinit var adapter: ChatsDialogAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mainActivity = (activity as MainActivity)
@@ -37,51 +47,38 @@ class ChatsDialogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setListeners()
-        setViews()
-    }
 
-    private fun setViews() {
-        mainActivity.changeToolbar("Имя пользователя", true)
-        setAdapter()
-    }
+        mainActivity.changeToolbar("Чат", true) // TODO user name
 
-    private fun setAdapter() {
-//        adapter = ChatsDialogAdapter()
-//        binding.rvMessages.layoutManager =
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//        binding.rvMessages.adapter = adapter
-//        messages = arrayListOf<Message>(
-//            Message("sa", "adsaddsszxczx", "YESTERDAY", MessageAuthor.Date),
-//            Message("sa", "adzxczx", "12:29", MessageAuthor.CUSTOMER),
-//            Message("sa", "adsaddsszxczx", "12:31", MessageAuthor.CUSTOMER),
-//            Message("sa", "adzxczx", "12:29", MessageAuthor.EXECUTOR),
-//            Message("sa", "ax", "12:39", MessageAuthor.EXECUTOR),
-//            Message(
-//                "sa",
-//                "qqqqdssxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxadsaddsszxczx",
-//                "12:59",
-//                MessageAuthor.CUSTOMER
-//            ),
-//            Message("sa", "adzxbvczx", "13:29", MessageAuthor.EXECUTOR),
-//            Message("sa", "axlih123321", "14:39", MessageAuthor.EXECUTOR),
-//            Message("sa", "adzx22222222222222222222222244444333331czx", "15:50", MessageAuthor.CUSTOMER),
-//            Message("sa", "axlih123321", "TODAY", MessageAuthor.Date),
-//            Message("sa", "azx6587czx", "19:50", MessageAuthor.CUSTOMER),
-//            Message("sa", "ffadzx2224333331czx", "20:05", MessageAuthor.CUSTOMER)
-//        )
-//        adapter.list = messages
-//        adapter.notifyDataSetChanged()
-    }
+        val id = UUID.fromString(arguments!!.get("chatId") as String)
+        val authorId = viewModel.getUserId()
 
-    private fun setListeners() {
+        adapter = ChatsDialogAdapter(authorId)
+        binding.rvMessages.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvMessages.adapter = adapter
+
+        // TODO fix render bug (Render only after text typing)
+        viewModel.getChatById(id).enqueue(object : Callback<Chat> {
+            override fun onFailure(call: Call<Chat>, t: Throwable) {
+                Log.d("MainActivity", "Request Failed: $call")
+            }
+
+            override fun onResponse(call: Call<Chat>, response: Response<Chat>) {
+                val chat = response.body()
+
+                if (!response.isSuccessful || chat == null) {
+                    Log.d("MainActivity", "Request Failed: $call")
+                } else {
+                    Log.d("MainActivity", "Request Success")
+                    adapter.list = chat.messages
+                }
+            }
+        })
+
+        // TODO send message to server
         binding.buttonSendMessage.setOnClickListener {
             val text = binding.etChat.text.toString()
             if (text.isNotEmpty()) {
-                val calendar = Calendar.getInstance()
-                val hour24hrs = calendar[Calendar.HOUR_OF_DAY]
-                val minutes = calendar[Calendar.MINUTE]
-
                 onMessageComing(
                     Message(
                         UUID.randomUUID(),
@@ -96,18 +93,18 @@ class ChatsDialogFragment : Fragment() {
     }
 
     private fun onMessageComing(message: Message) {
-        messages.add(message)
-        adapter.notifyItemInserted(messages.lastIndex)
-        binding.rvMessages.scrollToPosition(messages.lastIndex);
+        adapter.list.add(message)
+        adapter.notifyItemInserted(adapter.list.lastIndex)
+        binding.rvMessages.scrollToPosition(adapter.list.lastIndex)
     }
 
     fun onMessageUpdate(position: Int, message: Message) {
-        messages[position] = message
+        adapter.list[position] = message
         adapter.notifyItemChanged(position, message)
     }
 
     fun onMessageDeleted(position: Int) {
-        messages.removeAt(position)
+        adapter.list.removeAt(position)
         adapter.notifyItemRemoved(position)
     }
 }

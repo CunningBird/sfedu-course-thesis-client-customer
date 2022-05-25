@@ -48,9 +48,7 @@ class AppointmentsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (mainActivity.checkBinding()) {
-            mainActivity.changeToolbar(getString(R.string.your_appointments), false)
-        }
+        mainActivity.changeToolbar(getString(R.string.your_appointments), false)
 
         adapter = AppointmentsListAdapter(this::onAppointmentClick)
         binding.rvSchedule.adapter = adapter

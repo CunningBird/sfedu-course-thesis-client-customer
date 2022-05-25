@@ -24,7 +24,7 @@ class ServicesDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentServicesDetailsBinding
 
-    val viewModel: ServicesDetailsViewModel by viewModels {
+    private val viewModel: ServicesDetailsViewModel by viewModels {
         FragmentViewModelFactory(
             mainActivity.application,
             mainActivity.viewModel.backendRepository,
@@ -49,6 +49,8 @@ class ServicesDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mainActivity.changeToolbar(getString(R.string.service_details), true)
+
         val id = UUID.fromString(arguments!!.get("serviceId") as String)
 
         viewModel.getServiceById(id).enqueue(object : Callback<Service> {
@@ -71,15 +73,7 @@ class ServicesDetailsFragment : Fragment() {
                 }
             }
         })
-        setListeners()
-        setViews()
-    }
 
-    private fun setViews() {
-        mainActivity.changeToolbar(getString(R.string.service_details), true)
-    }
-
-    private fun setListeners() {
         binding.actionButton.setOnClickListener {
             // TODO Send POST to appoint
 //            val arg = bundleOf(

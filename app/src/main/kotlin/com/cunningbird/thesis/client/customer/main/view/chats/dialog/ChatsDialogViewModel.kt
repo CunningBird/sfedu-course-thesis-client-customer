@@ -2,10 +2,18 @@ package com.cunningbird.thesis.client.customer.main.view.chats.dialog
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Chat
+import com.cunningbird.thesis.client.customer.main.domain.repository.BackendRepository
+import retrofit2.Call
+import java.util.UUID
 
-class ChatsDialogViewModel(application: Application) : AndroidViewModel(application) {
+class ChatsDialogViewModel(application: Application, private val repository: BackendRepository) : AndroidViewModel(application) {
 
-    //todo нужно преобразовывать строку в дату и время
+    fun getUserId(): String {
+        return repository.getUserId()
+    }
 
-    //todo нужен метод добавляющий дату в список
+    fun getChatById(id: UUID): Call<Chat> {
+        return repository.getChat(id)
+    }
 }

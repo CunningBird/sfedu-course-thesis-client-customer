@@ -34,7 +34,7 @@ class AppointmentsListAdapter(private val onClickEvent: (p: Int) -> Unit) :
         holder.image.load("https://sun9-40.userapi.com/impg/okrr7lk-uTHQ6Hd7oxroSGAizxD7_vdMvUqIxg/vJnAl-FEDG0.jpg?size=1620x2160&quality=95&sign=f99f69daaee0315ace8912dd5377990a&type=album")
         holder.title.text = list[position].advertName
         holder.time.text = list[position].date?.let { formatter.format(it) } // TODO format this
-        holder.image.setOnClickListener {
+        holder.binding.setOnClickListener {
             onClickEvent(holder.adapterPosition)
         }
     }
