@@ -1,4 +1,9 @@
 package com.cunningbird.thesis.client.customer.main.domain.entities.chat
 
-class SendMessageRequest {
-}
+import com.squareup.moshi.Json
+import java.util.*
+
+data class SendMessageRequest(
+    @field:Json(name = "text") val text: String? = null,
+    @field:Json(name = "date") var date: Date? = null,
+)

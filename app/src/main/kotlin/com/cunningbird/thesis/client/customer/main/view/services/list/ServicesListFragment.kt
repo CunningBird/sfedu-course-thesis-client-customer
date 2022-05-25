@@ -23,7 +23,7 @@ class ServicesListFragment : Fragment() {
 
     private lateinit var binding: FragmentServicesListBinding
 
-    val viewModel: ServicesListViewModel by viewModels {
+    private val viewModel: ServicesListViewModel by viewModels {
         FragmentViewModelFactory(
             mainActivity.application,
             mainActivity.viewModel.backendRepository,

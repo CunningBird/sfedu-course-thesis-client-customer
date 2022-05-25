@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.cunningbird.thesis.client.customer.R
 import com.cunningbird.thesis.client.customer.databinding.FragmentServicesDetailsBinding
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
@@ -61,6 +63,8 @@ class ServicesDetailsFragment : Fragment() {
                     Log.d("MainActivity", "Request Failed: $call")
                 } else {
                     Log.d("MainActivity", "Request Success")
+
+                    binding.tvImage.load(service.image)
                     binding.tvServiceName.text = service.title
                     binding.tvServiceAmount.text = service.price.toString()
                     binding.tvServiceDescription.text = service.description

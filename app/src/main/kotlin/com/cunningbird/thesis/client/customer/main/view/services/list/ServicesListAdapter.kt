@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.cunningbird.thesis.client.customer.databinding.ItemServiceBinding
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
 
@@ -25,6 +27,7 @@ class ServicesListAdapter(private val onClickEvent: (p: Int) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
+        holder.image.load(list[position].image)
         holder.title.text = list[position].title
         holder.amount.text = list[position].price.toString() + "₽"
         holder.image.setOnClickListener {

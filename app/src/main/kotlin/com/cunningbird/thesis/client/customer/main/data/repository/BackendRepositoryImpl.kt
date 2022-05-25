@@ -15,6 +15,7 @@ import com.cunningbird.thesis.client.customer.main.domain.entities.chat.SendMess
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.ServiceList
 import com.cunningbird.thesis.client.customer.main.domain.repository.BackendRepository
+import com.cunningbird.thesis.client.customer.main.utils.moshi.DateJsonAdapter
 import com.cunningbird.thesis.client.customer.main.utils.moshi.UuidJsonAdapter
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -22,7 +23,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 
-class BackendRepositoryImpl(accessToken: String, userId: String) : BackendRepository {
+class BackendRepositoryImpl(accessToken: String, private val userId: String) : BackendRepository {
 
     private val backendClient: BackendClient
     private val identityClient: IdentityClient
@@ -36,6 +37,7 @@ class BackendRepositoryImpl(accessToken: String, userId: String) : BackendReposi
             .build()
         val moshi = Moshi.Builder()
             .add(UuidJsonAdapter())
+            .add(DateJsonAdapter())
             .build()
 
 
@@ -95,6 +97,10 @@ class BackendRepositoryImpl(accessToken: String, userId: String) : BackendReposi
 
     override fun sendMessage(chatId: UUID, request: SendMessageRequest): Call<Void> {
         return backendClient.sendMessage(chatId, request)
+    }
+
+    override fun getUserId(): String {
+        return userId
     }
 
     override fun logout(): Call<Void> {

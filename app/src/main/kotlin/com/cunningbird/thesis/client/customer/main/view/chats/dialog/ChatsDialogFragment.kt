@@ -76,21 +76,18 @@ class ChatsDialogFragment : Fragment() {
 
     private fun setListeners() {
         binding.buttonSendMessage.setOnClickListener {
-            //todo сделать с сервером
             val text = binding.etChat.text.toString()
             if (text.isNotEmpty()) {
-                //todo важно, время зависит от языка пользователя
                 val calendar = Calendar.getInstance()
                 val hour24hrs = calendar[Calendar.HOUR_OF_DAY]
-                val hour12hrs = calendar[Calendar.HOUR]
                 val minutes = calendar[Calendar.MINUTE]
 
                 onMessageComing(
                     Message(
-                        "sa",
+                        UUID.randomUUID(),
+                        UUID.randomUUID(),
                         text,
-                        "$minutes:$hour24hrs",
-                        //MessageAuthor.EXECUTOR
+                        Date(),
                     )
                 )
             }
@@ -99,11 +96,9 @@ class ChatsDialogFragment : Fragment() {
     }
 
     private fun onMessageComing(message: Message) {
-        //todo сделать проверку на дату и если нужно добавить элемент даты
         messages.add(message)
         adapter.notifyItemInserted(messages.lastIndex)
         binding.rvMessages.scrollToPosition(messages.lastIndex);
-
     }
 
     fun onMessageUpdate(position: Int, message: Message) {

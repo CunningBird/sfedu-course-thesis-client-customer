@@ -29,5 +29,7 @@ interface BackendRepository {
 
     fun sendMessage(chatId: UUID, request: SendMessageRequest): Call<Void>
 
+    fun getUserId(): String
+
     fun logout(): Call<Void>
 }

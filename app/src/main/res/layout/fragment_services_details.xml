@@ -1,60 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                              xmlns:tools="http://schemas.android.com/tools"
+                                              android:layout_width="match_parent"
+                                              android:layout_height="match_parent"
+                                              android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+            android:id="@+id/tv_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:srcCompat="@drawable/ic_launcher_foreground"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_service_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="40dp"
-        style="@style/serviceName"
-        android:text="[Service title]" />
+            android:id="@+id/tv_service_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
+            style="@style/serviceName"
+            android:text="[Service title]"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_service_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="40dp"
-        style="@style/serviceAmount"
-        android:text="[price]" />
+            android:id="@+id/tv_service_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
+            style="@style/serviceAmount"
+            android:text="[price]"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_service_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="40dp"
-        style="@style/serviceAddress"
-        tools:text="[address]" />
+            android:id="@+id/tv_service_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
+            style="@style/serviceAddress"
+            tools:text="[address]"/>
 
     <View
-        android:id="@+id/upper_separator"
-        android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_height="1dp"
-        android:background="@color/separator" />
+            android:id="@+id/upper_separator"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="1dp"
+            android:background="@color/separator"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/action_button"
-        style="@style/ActionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Appoint" />
+            android:id="@+id/action_button"
+            style="@style/ActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Appoint"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

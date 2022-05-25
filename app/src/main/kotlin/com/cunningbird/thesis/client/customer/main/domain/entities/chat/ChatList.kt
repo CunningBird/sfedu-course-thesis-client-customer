@@ -1,4 +1,7 @@
 package com.cunningbird.thesis.client.customer.main.domain.entities.chat
 
-class ChatList {
-}
+import com.squareup.moshi.Json
+
+data class ChatList(
+    @field:Json(name = "list") var list: List<Chat>? = null,
+)

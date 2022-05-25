@@ -36,7 +36,9 @@
             android:id="@+id/appointmentsDetailsFragment"
             android:name="com.cunningbird.thesis.client.customer.main.view.appointments.details.AppointmentsDetailsFragment"
             android:label="AppointmentDetailsFragment"
-            tools:layout="@layout/fragment_appointments_details"/>
+            tools:layout="@layout/fragment_appointments_details">
+        <argument android:name="id" app:argType="string"/>
+    </fragment>
 
 
     <fragment
@@ -52,7 +54,9 @@
             android:id="@+id/ChatsDialogFragment"
             android:name="com.cunningbird.thesis.client.customer.main.view.chats.dialog.ChatsDialogFragment"
             android:label="ChatFragment"
-            tools:layout="@layout/fragment_chats_dialog"/>
+            tools:layout="@layout/fragment_chats_dialog">
+        <argument android:name="id" app:argType="string"/>
+    </fragment>
 
 
     <fragment
