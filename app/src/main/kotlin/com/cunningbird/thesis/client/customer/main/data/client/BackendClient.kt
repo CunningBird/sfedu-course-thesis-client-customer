@@ -7,6 +7,7 @@ import com.cunningbird.thesis.client.customer.main.domain.entities.service.Servi
 import com.cunningbird.thesis.client.customer.main.domain.entities.appointment.CreateAppointmentRequest
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Chat
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.ChatList
+import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Message
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.SendMessageRequest
 import retrofit2.Call
 import retrofit2.http.Body
@@ -37,7 +38,7 @@ interface BackendClient {
     fun createAppointment(
         @Path("serviceId") serviceId: UUID,
         @Body request: CreateAppointmentRequest
-    ): Call<Void>
+    ): Call<Appointment>
 
     @GET("chats")
     fun getChats(): Call<ChatList>
@@ -51,5 +52,5 @@ interface BackendClient {
     fun sendMessage(
         @Path("chatId") serviceId: UUID,
         @Body request: SendMessageRequest
-    ): Call<Void>
+    ): Call<Message>
 }

@@ -5,6 +5,7 @@ import com.cunningbird.thesis.client.customer.main.domain.entities.appointment.A
 import com.cunningbird.thesis.client.customer.main.domain.entities.appointment.CreateAppointmentRequest
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Chat
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.ChatList
+import com.cunningbird.thesis.client.customer.main.domain.entities.chat.Message
 import com.cunningbird.thesis.client.customer.main.domain.entities.chat.SendMessageRequest
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.ServiceList
@@ -21,13 +22,13 @@ interface BackendRepository {
 
     fun getAppointment(id: UUID): Call<Appointment>
 
-    fun createAppointment(serviceId: UUID, request: CreateAppointmentRequest): Call<Void>
+    fun createAppointment(serviceId: UUID, request: CreateAppointmentRequest): Call<Appointment>
 
     fun getChats(): Call<ChatList>
 
     fun getChat(id: UUID): Call<Chat>
 
-    fun sendMessage(chatId: UUID, request: SendMessageRequest): Call<Void>
+    fun sendMessage(chatId: UUID, request: SendMessageRequest): Call<Message>
 
     fun getUserId(): String
 

@@ -48,8 +48,6 @@ class ChatsDialogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainActivity.changeToolbar("Чат", true) // TODO user name
-
         val id = UUID.fromString(arguments!!.get("chatId") as String)
         val authorId = viewModel.getUserId()
 
@@ -57,7 +55,6 @@ class ChatsDialogFragment : Fragment() {
         binding.rvMessages.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvMessages.adapter = adapter
 
-        // TODO fix render bug (Render only after text typing)
         viewModel.getChatById(id).enqueue(object : Callback<Chat> {
             override fun onFailure(call: Call<Chat>, t: Throwable) {
                 Log.d("MainActivity", "Request Failed: $call")
@@ -70,25 +67,50 @@ class ChatsDialogFragment : Fragment() {
                     Log.d("MainActivity", "Request Failed: $call")
                 } else {
                     Log.d("MainActivity", "Request Success")
+
+                    mainActivity.changeToolbar("Dialog with ${chat.executorName}", true)
                     adapter.list = chat.messages
+                    adapter.notifyItemChanged(adapter.list.lastIndex)
+                    binding.rvMessages.scrollToPosition(adapter.list.lastIndex)
                 }
             }
         })
 
-        // TODO send message to server
         binding.buttonSendMessage.setOnClickListener {
             val text = binding.etChat.text.toString()
-            if (text.isNotEmpty()) {
-                onMessageComing(
-                    Message(
-                        UUID.randomUUID(),
-                        UUID.randomUUID(),
-                        text,
-                        Date(),
-                    )
-                )
-            }
-            binding.etChat.text?.clear()
+
+            viewModel.sendMessage(id, text, Date()).enqueue(object : Callback<Message> {
+                override fun onFailure(call: Call<Message>, t: Throwable) {
+                    Log.d("MainActivity", "Request Failed: $call")
+                }
+
+                override fun onResponse(call: Call<Message>, response: Response<Message>) {
+                    val message = response.body()
+
+                    if (!response.isSuccessful || message == null) {
+                        Log.d("MainActivity", "Request Failed: $call")
+                        onMessageComing( // TODO Delete this
+                            Message(
+                                UUID.randomUUID(),
+                                UUID.randomUUID(),
+                                text,
+                                Date(),
+                            )
+                        )
+                    } else {
+                        Log.d("MainActivity", "Request Success")
+                        onMessageComing(
+                            Message(
+                                message.id,
+                                message.authorId,
+                                message.text,
+                                message.date,
+                            )
+                        )
+                    }
+                    binding.etChat.text?.clear()
+                }
+            })
         }
     }
 

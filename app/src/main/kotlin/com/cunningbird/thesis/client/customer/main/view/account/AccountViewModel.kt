@@ -8,8 +8,9 @@ import retrofit2.Call
 
 class AccountViewModel(application: Application, private val repository: BackendRepository) : AndroidViewModel(application) {
 
-    fun getUserName(): String { // TODO get name instead ID
-        return repository.getUserId()
+    fun getUserName(): String {
+        //return repository.getUserId()
+        return "Executor" // TODO get from repository
     }
 
     fun logout(): Call<Void> {

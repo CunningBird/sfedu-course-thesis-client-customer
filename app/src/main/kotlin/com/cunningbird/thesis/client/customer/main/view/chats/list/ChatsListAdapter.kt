@@ -31,11 +31,10 @@ class ChatsListAdapter(private val onClickEvent: (p: Int) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MessagesViewHolder, position: Int) {
-        // TODO getUserAvatar
-        holder.image.load("https://sun9-40.userapi.com/impg/okrr7lk-uTHQ6Hd7oxroSGAizxD7_vdMvUqIxg/vJnAl-FEDG0.jpg?size=1620x2160&quality=95&sign=f99f69daaee0315ace8912dd5377990a&type=album") {
+        holder.image.load(list[position].executorAvatar) {
             transformations(CircleCropTransformation())
         }
-        holder.name.text = "Executor" //list[position].id.toString()
+        holder.name.text = list[position].executorName.toString()
         holder.description.text = list[position].messages.last().text
 
         holder.apply{

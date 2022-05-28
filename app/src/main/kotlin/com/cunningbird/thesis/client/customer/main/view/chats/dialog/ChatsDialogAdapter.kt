@@ -50,10 +50,10 @@ class ChatsDialogAdapter(private val authorId: String) : RecyclerView.Adapter<Re
 
     override fun getItemViewType(position: Int): Int {
         val author = list[position].authorId.toString()
-        return if (author == authorId) {
-            FROM
-        } else if (author != authorId) {
+        return if (author != authorId) {
             TO
+        } else if (author == authorId) {
+            FROM
         } else {
             DATE
         }

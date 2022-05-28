@@ -2,6 +2,7 @@ package com.cunningbird.thesis.client.customer.main.view.services.details
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.cunningbird.thesis.client.customer.main.domain.entities.appointment.Appointment
 import com.cunningbird.thesis.client.customer.main.domain.entities.appointment.CreateAppointmentRequest
 import com.cunningbird.thesis.client.customer.main.domain.entities.service.Service
 import com.cunningbird.thesis.client.customer.main.domain.repository.BackendRepository
@@ -14,7 +15,7 @@ class ServicesDetailsViewModel(application: Application, private val repository:
         return repository.getServiceById(id)
     }
 
-    fun appointService(serviceId: UUID, request: CreateAppointmentRequest): Call<Void> {
+    fun appointService(serviceId: UUID, request: CreateAppointmentRequest): Call<Appointment> {
         return repository.createAppointment(serviceId, request)
     }
 }
